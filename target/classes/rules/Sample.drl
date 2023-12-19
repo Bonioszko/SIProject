@@ -1,0 +1,61 @@
+package com.sample
+ 
+import com.sample.DroolsTest.Message;
+import javax.swing.JOptionPane;
+import org.kie.api.runtime.KieRuntime
+import javax.swing.JFrame
+ global JFrame frame
+global javax.swing.JTextArea textArea
+
+declare Question
+	text: String
+	response : String
+end
+
+function void doCheckout(JFrame frame, KieRuntime krt, Question q) {
+        Object[] options = {"Yes",
+                            "No"};
+
+        int n = JOptionPane.showOptionDialog(frame,
+                                             q.getText(),
+                                             "",
+                                             JOptionPane.YES_NO_OPTION,
+                                             JOptionPane.QUESTION_MESSAGE,
+                                             null,
+                                             options,
+                                             options[0]);
+
+     
+       q.setResponse(options[n].toString());
+      System.out.println(n );
+}
+
+
+rule "Hello World"
+    when
+        m : Message( status == Message.HELLO, myMessage : message )
+    then
+        System.out.println( myMessage );
+        m.setMessage( "Goodbye cruel world" );
+        m.setStatus( Message.GOODBYE );
+        update( m );
+end
+
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
+
+rule "Gui"
+	dialect "java"
+	when
+	then
+	Question q = new Question();
+	q.setText("Czy lubisz koty");
+	doCheckout(frame, kcontext.getKieRuntime(), q);
+	System.out.println(q.getResponse());
+		
+end
+	
