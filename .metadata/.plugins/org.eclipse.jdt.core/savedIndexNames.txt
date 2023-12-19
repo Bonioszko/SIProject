@@ -1,2 +1,0 @@
-INDEX VERSION 1.130+C:\Users\kubab\Desktop\eclipse-java-oxygen-R-win32\SIProject\.metadata\.plugins\org.eclipse.jdt.core
-3271193799.index
