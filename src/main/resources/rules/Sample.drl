@@ -1,6 +1,5 @@
 package com.sample
  
-import com.sample.DroolsTest.Message;
 import javax.swing.JOptionPane;
 import org.kie.api.runtime.KieRuntime
 import javax.swing.JFrame
