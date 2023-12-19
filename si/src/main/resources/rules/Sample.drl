@@ -1,0 +1,105 @@
+package com.sample
+ 
+import com.sample.DroolsTest.Message;
+import javax.swing.JOptionPane;
+import org.kie.api.runtime.KieRuntime
+import javax.swing.JFrame
+global JFrame frame
+global javax.swing.JTextArea textArea
+
+declare Question
+	text: String
+	response : String
+end
+
+declare Response
+	text: String
+end
+
+function void processQuestion(JFrame frame, KieRuntime krt, Question q) {
+        Object[] options = {"Yes",
+                            "No"};
+
+        int n = JOptionPane.showOptionDialog(frame,
+                                             q.getText(),
+                                             "",
+                                             JOptionPane.YES_NO_OPTION,
+                                             JOptionPane.QUESTION_MESSAGE,
+                                             null,
+                                             options,
+                                             options[0]);
+
+        q.setResponse(options[n].toString());
+}
+
+function void showResult(JFrame frame, KieRuntime krt, Question q) {
+        JOptionPane.showMessageDialog(frame, q.getText(), "Here is your result:", JOptionPane.PLAIN_MESSAGE);  
+}
+
+rule "Init"
+	dialect "java"
+	when
+	then
+	Question q = new Question();
+	q.setText("A cartoon based on a video game?");
+	processQuestion(frame, kcontext.getKieRuntime(), q);
+	insert(q);
+end
+
+rule "nintendo"
+	when 
+		q : Question (text == "A cartoon based on a video game?", response == "Yes")
+	then
+		q.setText("A nintendo franchise?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+
+rule "nintendo_finish"
+	when 
+		q : Question (text == "A nintendo franchise?", response == "Yes")
+	then
+		String response = "1. The Super Mario Bros. Super Show\n2. Captain N The Game Master\n3. The Adventures of Super Mario Bros. 3\n4. Super Mario World\n5. The Legend of Zelda\n6. Pokemon";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "non_nintendo_finish"
+	when 
+		q : Question (text == "A nintendo franchise?", response == "No")
+	then
+		String response = "1. Adventures of Sonic the Hedgehog\n2. Mega Man\n3. Mortal Kombat Defenders of the Realm\n4. Double Dragon\n5. Wing Commander Academy\n6. Street Fighter";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "celebrity"
+	when 
+		q : Question (text == "A cartoon based on a video game?", response == "No")
+	then
+		q.setText("A celebrity?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "celebrity_finish"
+	when 
+		q : Question (text == "A celebrity?", response == "Yes")
+	then
+		String response = "1. Chuck Norris: Karate Kommandos\n2. Mister T";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "animals_furries"
+	when 
+		q : Question (text == "A celebrity?", response == "No")
+	then
+		q.setText("Animals, furries, and the like?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
