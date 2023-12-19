@@ -102,3 +102,126 @@ rule "animals_furries"
 		processQuestion(frame, kcontext.getKieRuntime(), q);
 		update(q);
 end
+
+rule "non_animals_furries"
+	when q: Question (text == "Animals, furries, and the like?", response =="No")
+	then 
+		q.setText("Do you dig giant robots?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "giant_robots_finish"
+	when q: Question(text =="Do you dig giant robots?", response == "Yes")
+	then
+		String response = "1. Robotech\n2. Voltron\n3. Tranformers\n4. Challenge of the Gobots";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "non_giant_robots"
+when q: Question(text =="Do you dig giant robots?", response == "No")
+	then 
+		q.setText("A cartoon based on a movie?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "movie"
+when q: Question(text =="A cartoon based on a movie?", response == "Yes")
+	then 
+		q.setText("An R-rated movie?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+rule "non_movie"
+when q: Question(text =="A cartoon based on a movie?", response == "No")
+	then 
+		q.setText("Do you want a post apocalyptic setting?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "r-rated"
+when q: Question(text =="An R-rated movie?", response == "Yes")
+	then 
+		String response = "1. Rambo and the Force of Freedom\n2. Robocop: The Animated Series\n3. Highlander: The Animated Series";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "non_r-rated"
+when q: Question(text =="An R-rated movie?", response == "No")
+	then 
+		String response = "1. Star Wars: Ewoks\n2. Star Wars: Droids\n3. James Bond Jr.\n4. Extreme Ghostbusters\n5. The Real Ghostbusters";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "apocalyptic"
+when q: Question(text =="Do you want a post apocalyptic setting?", response == "Yes")
+	then 
+		String response = "1. Highlander: The Animated Series\n2. Thundarr the Barbarian\n3. Cadilacs and Dinosaurus\n4. Spiral Zone";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "non_apocalyptic"
+when q: Question(text =="Do you want a post apocalyptic setting?", response == "No")
+	then 
+	q.setText("Swords and sorcery?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "swords"
+when q: Question(text =="Swords and sorcery?", response == "Yes")
+	then 
+		String response = "1. The Pirates of Dark Water\n2. Thundarr the Barbarian\n3. Visionaries\n4. Dungeons & Dragons\n5. She-Ra, Princess of Power\n6. Conan the Adventurer\n7. He-Man and the Masters of the Universe\n8. King Arthur and the Knights of Justice";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+rule "non_swords"
+when q: Question(text =="Swords and sorcery?", response == "No")
+	then 
+		q.setText("Military and law enforcement?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "non_military"
+when q: Question(text =="Military and law enforcement?", response == "No")
+	then 
+		q.setText("Space?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "military"
+when q: Question(text =="Military and law enforcement?", response == "Yes")
+	then 
+		String response = "1. C.O.P.S.\n2. G.I. Joe\n3. M.A.S.K.\n4. Spiral Zone\n5. Exosquad\n6. SilverHawks\n7. Centurions\n8. Sky Commanders\n9. Sam & Max: Freelance Police\n10. The Adventure of the Galaxy Rangers\n11. Inspector Gadget\n12. Brave Starr";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+rule "non_space"
+when q: Question(text =="Space?", response == "No")
+	then 
+		q.setText("Cowboys?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+rule "space"
+when q: Question(text =="Space?", response == "Yes")
+	then 
+		String response = "1. Captains Simian and the Space Monkeys\n2. Jayce and the Wheeled Warriors\n3. Exoscquad\n4. SilverHawks\n5. Sky Commanders\n6. The Adventure of the Galaxy Rangers\n7. BraveStarr";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
