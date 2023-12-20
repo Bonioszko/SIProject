@@ -102,3 +102,168 @@ rule "animals_furries"
 		processQuestion(frame, kcontext.getKieRuntime(), q);
 		update(q);
 end
+
+
+rule "cats"
+	when 
+		q : Question (text == "Animals, furries, and the like?", response == "Yes")
+	then
+		q.setText("Cats?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "cats_finish"
+	when 
+		q : Question (text == "Cats?", response == "Yes")
+	then
+		String response = "1. ThunderCats\n2. Swat Kats";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "rodents"
+	when 
+		q : Question (text == "Cats?", response == "No")
+	then
+		q.setText("Rodents?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "rodents_finish"
+	when 
+		q : Question (text == "Rodents?", response == "Yes")
+	then
+		String response = "1. Biker Mice from Mars\n2. Danger Mouse\n3. Chip N Dale Rescue Rangers";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "dinosaurs"
+	when 
+		q : Question (text == "Rodents?", response == "No")
+	then
+		q.setText("Dinosaurs?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "dinosaurs_finish"
+	when 
+		q : Question (text == "Dinosaurs?", response == "Yes")
+	then
+		String response = "1. Cadillacs and Dinosaurs\n2. Extreme Dinosaurs\n3. Dino Riders\n4. Dinosaucers";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "ducks"
+	when 
+		q : Question (text == "Dinosaurs?", response == "No")
+	then
+		q.setText("Ducks?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "ducks_finish"
+	when 
+		q : Question (text == "Ducks?", response == "Yes")
+	then
+		String response = "1. Count Duckula\n2. DuckTales\n3. Darwing Duck";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "bears"
+	when 
+		q : Question (text == "Ducks?", response == "No")
+	then
+		q.setText("Bears?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "bears_finish"
+	when 
+		q : Question (text == "Bears?", response == "Yes")
+	then
+		String response = "1. TaleSpin\n2. Disney's Adventures of the Gummi Bears\n3. The Care Bears";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "monkeys"
+	when 
+		q : Question (text == "Bears?", response == "No")
+	then
+		q.setText("Monkeys?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "monkeys_finish"
+	when 
+		q : Question (text == "Monkeys?", response == "Yes")
+	then
+		String response = "Captain Simian and the Space Monkeys";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "cows"
+	when 
+		q : Question (text == "Monkeys?", response == "No")
+	then
+		q.setText("Cows?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "cows_finish"
+	when 
+		q : Question (text == "Cows?", response == "Yes")
+	then
+		String response = "Wild West Cowboyts of Moo Mesa";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "godless"
+	when 
+		q : Question (text == "Cows?", response == "No")
+	then
+		q.setText("Godless abominations?");
+		processQuestion(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "godless_finish_yes"
+	when 
+		q : Question (text == "Godless abominations?", response == "Yes")
+	then
+		String response = "1. Smurfs\n2. Snorks";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+rule "godless_finish_no"
+	when 
+		q : Question (text == "Godless abominations?", response == "No")
+	then
+		String response = "1. Teenage Mutant Ninja Turtles\n2. Street Sharks\n3. Gargoyles";
+		q.setText(response);
+		showResult(frame, kcontext.getKieRuntime(), q);
+		update(q);
+end
+
+
